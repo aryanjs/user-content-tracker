@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# User Tracker App
+
+This is a dummy react project. please don't pull it.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
