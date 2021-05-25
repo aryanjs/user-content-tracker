@@ -4,19 +4,19 @@ import Card from './Card'
 import Button from './Button'
 import classes from './ErrorModal.module.css'
 
-const ErrorModal = (props) => {
+const ErrorModal = ({ onConfirm, title, message }) => {
     return (
         <div>
-            <div className={classes.backdrop} onClick={props.onConfirm} aria-hidden="true" />
+            <div className={classes.backdrop} onClick={onConfirm} aria-hidden="true" />
             <Card className={classes.modal}>
                 <header className={classes.header}>
-                    <h2>{props.title}</h2>
+                    <h2>{title}</h2>
                 </header>
                 <div className={classes.content}>
-                    <p>{props.message}</p>
+                    <p>{message}</p>
                 </div>
                 <footer className={classes.actions}>
-                    <Button onClick={props.onConfirm}>Okay</Button>
+                    <Button onClick={onConfirm}>Okay</Button>
                 </footer>
             </Card>
         </div>

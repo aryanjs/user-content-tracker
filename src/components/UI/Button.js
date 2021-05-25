@@ -2,10 +2,13 @@ import React from 'react'
 
 import classes from './Button.module.css'
 
-const Button = (props) => {
+const Button = ({ type, customClass, onClick, children }) => {
     return (
-        <button className={classes.button} type={props.type || 'button'} onClick={props.onClick}>
-            {props.children}
+        <button
+            className={`${classes.button}  ${customClass}`}
+            type={type || 'button'}
+            onClick={onClick}>
+            {children}
         </button>
     )
 }
