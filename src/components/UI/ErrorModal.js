@@ -1,27 +1,26 @@
 import React from 'react'
-import Button from './Button'
+
 import Card from './Card'
+import Button from './Button'
 import classes from './ErrorModal.module.css'
 
-const ErrorModel = ({ title, message, onConfirm }) => {
+const ErrorModal = ({ onConfirm, title, message }) => {
     return (
-        <>
+        <div>
             <div className={classes.backdrop} onClick={onConfirm} aria-hidden="true" />
             <Card className={classes.modal}>
                 <header className={classes.header}>
                     <h2>{title}</h2>
                 </header>
-
                 <div className={classes.content}>
                     <p>{message}</p>
                 </div>
-
                 <footer className={classes.actions}>
-                    <Button onClick={onConfirm}>Close</Button>
+                    <Button onClick={onConfirm}>Okay</Button>
                 </footer>
             </Card>
-        </>
+        </div>
     )
 }
 
-export default ErrorModel
+export default ErrorModal
