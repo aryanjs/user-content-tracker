@@ -1,38 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import AddUser from './components/Users/AddUser'
-import UsersList from './components/Users/UsersList'
+import Login from './components/Login/Login'
+import Home from './components/Home/Home'
+import MainHeader from './components/MainHeader/MainHeader'
 
 const App = () => {
-    const [usersList, setUsersList] = useState([])
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const addUserHandler = (uName, uAge) => {
-        setUsersList((perevUsersList) => {
-            return [
-                ...perevUsersList,
-                {
-                    name: uName,
-                    age: uAge,
-                    id: Math.random().toString(),
-                    onDeleteButton: onDeleteButton
-                }
-            ]
-        })
+    useEffect(() => {
+        const storedLogedInUserInfo = localStorage.getItem('isLoggedIn')
+
+        if (storedLogedInUserInfo === '1') {
+            setIsLoggedIn(true)
+        }
+    }, [])
+
+    // eslint-disable-next-line no-unused-vars
+    const loginHandler = (email, password) => {
+        // We should of course check email and password
+        // But it's just a dummy/ demo anyways
+
+        localStorage.setItem('isLoggedIn', '1')
+        setIsLoggedIn(true)
     }
 
-    const onDeleteButton = (id) => {
-        const newList = usersList.filter((item) => item.id !== id)
-        setUsersList(newList)
+    const logoutHandler = () => {
+        setIsLoggedIn(false)
+        localStorage.removeItem('isLoggedIn', '0')
     }
 
     return (
         <>
-            <AddUser onAddUser={addUserHandler} />
-            {usersList.length !== 0 ? (
-                <UsersList users={usersList} />
-            ) : (
-                <div className="users-list-empty">Users list is empty</div>
-            )}
+            <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+            <main>
+                {!isLoggedIn && <Login onLogin={loginHandler} />}
+                {isLoggedIn && <Home onLogout={logoutHandler} />}
+            </main>
         </>
     )
 }
